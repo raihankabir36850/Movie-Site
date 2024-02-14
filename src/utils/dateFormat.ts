@@ -7,10 +7,10 @@ export const getDateRange = (months: number) => {
   startDate.setMonth(startDate.getMonth() - months);
 
   // Format dates in 'YYYY/MM/DD' format
-  const startDateStr = formatDate(startDate);
-  const endDateStr = formatDate(endDate);
+  // const startDateStr = formatDate(startDate);
+  // const endDateStr = formatDate(endDate);
 
-  return [startDateStr, endDateStr];
+  return [startDate, endDate];
 };
 
 export const formatDate = (date: Date) => {

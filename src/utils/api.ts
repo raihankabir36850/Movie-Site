@@ -6,7 +6,7 @@ const headers = {
   Authorization: `Bearer ${TMDB_API_ACCESS_TOKEN}`,
 };
 
-export const fetchMoviesGenresData = async (url: string) => {
+export const fetchData = async (url: string) => {
   try {
     const response = await fetch(`${BASE_URL}/${url}`, {
       method: 'GET',

@@ -1,27 +1,29 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import type { RootState } from './store/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMoviesGenresData } from './utils/api';
-import { getGenreData } from './store/moviesDetails';
+import { useDispatch } from 'react-redux';
+import { fetchData } from './utils/api';
+import { getApiConfiguration } from './store/moviesDetails';
 
 import Home from './pages/home/Home';
-import Details from './pages/details/Details';
-import Movies from './pages/movies/Movies';
 
 const App = () => {
-  const { isLoading, genres } = useSelector((state: RootState) => state.home);
-  console.log(isLoading);
+  //const { isLoading, url } = useSelector((state: RootState) => state.home);
+  // console.log(isLoading);
   const dispatch = useDispatch();
   // fetch the genres data
 
   useEffect(() => {
-    const fetchGenresData = async () => {
-      const data = await fetchMoviesGenresData('/genre/movie/list');
-      dispatch(getGenreData(data));
+    const fetchApiConfiguration = async () => {
+      const data = await fetchData('/configuration');
+      const url = {
+        backdrop: data.images.secure_base_url + 'original',
+        poster: data.images.secure_base_url + 'original',
+        profile: data.images.secure_base_url + 'original',
+      };
+      dispatch(getApiConfiguration(url));
     };
 
-    fetchGenresData();
+    fetchApiConfiguration();
   }, [dispatch]);
 
   // console.log('genres', genres);
