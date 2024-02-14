@@ -19,7 +19,6 @@ const DateFormat: React.FC<ReactDatePickerProps> = () => {
   }, []);
 
   useEffect(() => {
-    console.log('afterchange', startDate, endDate);
     const date = {
       startDate: startDate ? formatDate(startDate) : null,
       endDate: endDate ? formatDate(endDate) : null,
@@ -30,6 +29,7 @@ const DateFormat: React.FC<ReactDatePickerProps> = () => {
   return (
     <DatePicker
       selectsRange={true}
+      closeOnScroll={(e) => e.target === document}
       startDate={startDate}
       endDate={endDate}
       isClearable={true}
@@ -43,7 +43,3 @@ const DateFormat: React.FC<ReactDatePickerProps> = () => {
 };
 
 export default DateFormat;
-
-// const [startDate, endDate] = getDateRange(2);
-// console.log('Start Date:', startDate);
-// console.log('End Date:', endDate);
