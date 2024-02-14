@@ -1,0 +1,14 @@
+.logo {
+  .logoLink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    .logoImage {
+      width: 30px;
+    }
+    .logoTitle {
+      color: #fff;
+    }
+  }
+}

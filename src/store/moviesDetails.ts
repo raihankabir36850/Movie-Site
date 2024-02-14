@@ -3,6 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface MoviesState {
   isLoading: boolean;
+  startDate: Date;
+  endDate: Date;
   genres: Array<{
     id: number;
     title: string;
