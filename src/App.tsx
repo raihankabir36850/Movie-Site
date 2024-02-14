@@ -5,7 +5,8 @@ import { fetchMoviesGenresData } from './utils/api';
 import { getGenreData } from './store/moviesDetails';
 
 const App = () => {
-  const { isLoading, genres } = useSelector((state: RootState) => state.moviesDetails);
+  const { isLoading, genres } = useSelector((state: RootState) => state.home);
+  console.log(isLoading);
   const dispatch = useDispatch();
   // fetch the genres data
 
@@ -17,6 +18,8 @@ const App = () => {
 
     fetchGenresData();
   }, [dispatch]);
+
+  console.log('genres', genres);
   return <div>data</div>;
 };
 

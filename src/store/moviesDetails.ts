@@ -14,17 +14,18 @@ const initialState: MoviesState = {
   genres: [],
 };
 
-export const counterSlice = createSlice({
-  name: 'moviesDetails',
+export const moviesDeatailsSlice = createSlice({
+  name: 'home',
   initialState,
   reducers: {
     getGenreData: (state, action) => {
-      console.log('working', state, action);
+      // console.log('working', state, action);
+      state.genres = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getGenreData } = counterSlice.actions;
+export const { getGenreData } = moviesDeatailsSlice.actions;
 
-export default counterSlice.reducer;
+export default moviesDeatailsSlice.reducer;

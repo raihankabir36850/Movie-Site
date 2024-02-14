@@ -3,7 +3,7 @@ import moviesDetails from './moviesDetails';
 
 export const store = configureStore({
   reducer: {
-    moviesDetails,
+    home: moviesDetails,
   },
 });
 
