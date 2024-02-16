@@ -20,7 +20,6 @@ export const ContentWrapper = () => {
   const { genres, date } = useSelector((state: RootState) => state.home);
 
   const fetchGenreMovie = async (index: number) => {
-    console.log('index', index);
     const genreId = genres[index].id;
     const primaryReleaseDateGte = date.startDate;
     const primaryReleaseDateLte = date.endDate;
