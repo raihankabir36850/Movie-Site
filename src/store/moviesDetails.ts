@@ -17,6 +17,10 @@ interface MoviesState {
     title: string;
   }>;
   movieDate: boolean;
+  watchList: Array<{
+    movieId: number;
+    addedDate: string;
+  }>;
 }
 
 const initialState: MoviesState = {
@@ -32,6 +36,7 @@ const initialState: MoviesState = {
     profile: '',
   },
   movieDate: false,
+  watchList: JSON.parse(localStorage.getItem('watchList')).length > 1 ? JSON.parse(localStorage.getItem('watchList')) : [],
 };
 
 export const moviesDeatailsSlice = createSlice({
@@ -50,9 +55,13 @@ export const moviesDeatailsSlice = createSlice({
     getMoviesDate: (state, action) => {
       state.movieDate = action.payload;
     },
+    getWatchListItem: (state, action) => {
+      localStorage.setItem('watchList', JSON.stringify(action.payload));
+      state.watchList = action.payload;
+    },
   },
 });
 
-export const { getApiConfiguration, getGenreData, getDate, getMoviesDate } = moviesDeatailsSlice.actions;
+export const { getApiConfiguration, getGenreData, getDate, getMoviesDate, getWatchListItem } = moviesDeatailsSlice.actions;
 
 export default moviesDeatailsSlice.reducer;

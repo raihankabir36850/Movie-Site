@@ -4,6 +4,7 @@ import Img from '../lazyLoadImage/Img';
 import './castContainer.scss';
 
 const CastContainer = ({ data }) => {
+  console.log('cast', data);
   const { url } = useSelector((state: RootState) => state.home);
 
   return (

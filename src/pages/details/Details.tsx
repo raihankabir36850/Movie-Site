@@ -5,11 +5,6 @@ import CastContainer from '../../components/cast/CastContainer';
 import CrewContainer from '../../components/crew/CrewContainer';
 import Similar from '../../components/similar/Similar';
 
-// const MAGIC_NUMBER = 5;
-// const generateRandomNumber = () => {
-//   return Math.floor(Math.random() * 10);
-// };
-
 const Details = () => {
   const { id } = useParams();
   const { loading, data, error } = useFetch(`movie/${id}`);

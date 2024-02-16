@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { fetchData } from './utils/api';
 import { getApiConfiguration, getGenreData } from './store/moviesDetails';
 import Details from './pages/details/Details';
+import WishList from './pages/wishList/WishList';
 import PageNotFound from './pages/404/PageNotFound';
 
 import Home from './pages/home/Home';
@@ -39,6 +40,8 @@ const App = () => {
         <Route path='/' element={<Navigate to='/movie' />} />
         <Route path='/movie' element={<Home />} />
         <Route path='/movies/:id' element={<Details />} />
+        <Route path='/movies/:id' element={<Details />} />
+        <Route path='/watchlist' element={<WishList />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { getWatchListItem } from '../../store/moviesDetails';
 import './MovieCard.scss';
 
 const toHoursAndMinutes = (totalMinutes: number) => {
@@ -22,10 +24,31 @@ const formatDate = (dateString: string | number | Date) => {
 };
 
 const MovieCard = ({ data, cast, crew }) => {
-  const { url } = useSelector((state: RootState) => state.home);
+  const { url, watchList } = useSelector((state: RootState) => state.home);
+  const dispatch = useDispatch();
   const { id, backdrop_path, imdb_id, title, overview, release_date, runtime, vote_average, genres, tagline } = data;
   const director = crew.filter((item) => item.job === 'Director');
   const writers = crew.filter((item) => item.job === 'Screenplay' || item.job === 'Story' || item.job === 'Writer');
+
+  const handleAddWatchItem = () => {
+    const data = {
+      id: id,
+      addedDate: formatDate(new Date()),
+    };
+
+    const check = watchList.find((item) => item.id === id);
+
+    if (check) return;
+
+    const modifiedWatchList = [...watchList, data];
+    dispatch(getWatchListItem(modifiedWatchList));
+  };
+
+  const handleremoveWatchItem = () => {
+    const modifiedList = watchList.filter((item) => item.id !== id);
+    dispatch(getWatchListItem(modifiedList));
+  };
+
   return (
     <div className='movieCard'>
       <div className='movieCardWithPoster'>
@@ -87,6 +110,12 @@ const MovieCard = ({ data, cast, crew }) => {
               IMDB LINK
             </a>
           </div>
+          <button type='button' onClick={() => handleAddWatchItem()}>
+            Add to watchlist
+          </button>
+          <button type='button' onClick={() => handleremoveWatchItem()}>
+            remove to watchlist
+          </button>
         </div>
       </div>
     </div>
