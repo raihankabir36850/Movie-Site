@@ -13,14 +13,15 @@ export const useFetch = (url: string) => {
 
     fetchData(url)
       .then((res) => {
-        setLoading(false);
         setData(res);
+        setLoading(false);
       })
       .catch(() => {
         setLoading(false);
         setError('Something went wrong.');
       });
   }, [url]);
+
   return { loading, data, error };
 };
 
