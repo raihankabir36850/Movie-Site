@@ -15,14 +15,18 @@ const formatDate = (dateString: string | number | Date) => {
 };
 
 const SimilarItem = ({ res }) => {
+  console.log(res, 'res');
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
-  const { backdrop_path, title, id, vote_average } = res;
-  const imgUrl = backdrop_path ? url.backdrop + backdrop_path : '';
+  const { poster_path, title, id, vote_average } = res;
+  const imgUrl = poster_path ? url.backdrop + poster_path : '';
 
   const handleAddWatchItem = () => {
     const data = {
       id: id,
+      movieTitle: title,
+      moviePoster: poster_path,
+      voteAverage: vote_average,
       addedDate: formatDate(new Date()),
     };
 
@@ -38,7 +42,7 @@ const SimilarItem = ({ res }) => {
     <div className='item'>
       <Link to={`/movies/${id}`} className='movieLink'>
         <div className='moviePoster'>
-          <Img src={imgUrl} className={''} />
+          <img src={imgUrl} alt={title} />
         </div>
       </Link>
       {vote_average && (

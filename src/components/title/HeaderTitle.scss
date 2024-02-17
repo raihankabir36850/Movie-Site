@@ -1,0 +1,26 @@
+.headingArchive {
+  overflow: hidden;
+  text-align: center;
+  font-size: 2rem;
+  margin: 15px 0 25px 0;
+  &:before,
+  &:after {
+    content: '';
+    display: inline-block;
+    height: 3px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+    background-color: hsl(11deg 20.11% 73.57%);
+  }
+
+  &:before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+
+  &:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }
+}

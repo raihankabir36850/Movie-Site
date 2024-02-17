@@ -1,0 +1,71 @@
+.movies {
+  width: calc(100% / 5);
+  padding: 10px;
+  .poster {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    &:hover {
+      img {
+        transform: scale(1.2);
+        filter: blur(2px) brightness(0.3);
+      }
+      .rating {
+        margin-bottom: 0;
+      }
+    }
+    span {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 450px;
+        object-fit: cover;
+        transition: all 0.2s ease-in-out;
+      }
+    }
+
+    .rating {
+      background: rgb(255 255 255 / 20%);
+      color: #fff;
+      text-shadow: 1px 0 #000;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 3px 8px;
+      line-height: 18px;
+      font-size: 12px;
+      font-weight: 300;
+      margin-bottom: -40px;
+      overflow: hidden;
+      transition: 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      .movieRating {
+        width: 19px;
+      }
+    }
+  }
+
+  .data {
+    h3 {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 1px;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      a {
+        text-decoration: none;
+      }
+    }
+    .year {
+    }
+  }
+}

@@ -19,6 +19,9 @@ interface MoviesState {
   movieDate: boolean;
   watchList: Array<{
     movieId: number;
+    movieTitle: string;
+    moviePoster: string;
+    voteAverage: number;
     addedDate: string;
   }>;
 }
@@ -36,7 +39,7 @@ const initialState: MoviesState = {
     profile: '',
   },
   movieDate: false,
-  watchList: JSON.parse(localStorage.getItem('watchList')).length > 1 ? JSON.parse(localStorage.getItem('watchList')) : [],
+  watchList: JSON.parse(localStorage.getItem('watchList'))?.length > 1 ? JSON.parse(localStorage.getItem('watchList')) : [],
 };
 
 export const moviesDeatailsSlice = createSlice({
