@@ -1,0 +1,24 @@
+.listItem {
+  max-width: 150px;
+  .profileImg {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+  .name {
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 600;
+  }
+  .character {
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+}

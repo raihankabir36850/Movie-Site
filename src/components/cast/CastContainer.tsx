@@ -1,32 +1,14 @@
-import { useSelector } from 'react-redux';
-import type { RootState } from '../../store/store';
-import Img from '../lazyLoadImage/Img';
-import './castContainer.scss';
+import './CastContainer.scss';
+import CastItem from './CastItem';
+import useFetch from '../../hooks/useFetch';
+import Title from '../title/Title';
 
-const CastContainer = ({ data }) => {
-  console.log('cast', data);
-  const { url } = useSelector((state: RootState) => state.home);
-
+const CastContainer = ({ id }) => {
+  const { loading, data, error } = useFetch(`movie/${id}/credits`);
   return (
-    <div className='castWrapper'>
-      <h1 className='castTitle'>Top Cast</h1>
-      <div className='listItems'>
-        {data.map((item) => {
-          const imgUrl = item.profile_path ? url.profile + item.profile_path : '';
-          if (!item.profile_path) return;
-          if (item.profile_path) {
-            return (
-              <div key={item.id} className='listItem'>
-                <div className='profileImg'>
-                  <Img src={imgUrl} className='' />
-                </div>
-                <div className='name'>{item.name}</div>
-                <div className='character'>{item.character}</div>
-              </div>
-            );
-          }
-        })}
-      </div>
+    <div className='castHeroSection'>
+      {!loading && !!data && <Title title='Top Cast' />}
+      <div className='castWrapper'>{!loading && !!data && data.cast.map((item) => <CastItem key={item.id} res={item} />)}</div>
     </div>
   );
 };

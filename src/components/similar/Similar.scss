@@ -1,20 +1,9 @@
-.similarSection {
-  .similarWrapper {
-    .listing {
-      display: flex;
-      flex-wrap: wrap;
-      .item {
-        .moviePoster {
-          span {
-            img {
-              width: 50px;
-              height: 50px;
-            }
-          }
-        }
-        .movieTitle {
-        }
-      }
+.similarWrapper {
+  .slick-track {
+    display: flex;
+    gap: 15px;
+    .slick-slide {
+      padding: 5px;
     }
   }
 }
