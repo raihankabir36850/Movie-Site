@@ -2,3 +2,18 @@
 .similarMoviesSection {
   padding: 30px;
 }
+
+.similarMoviesSection {
+  margin-bottom: 50px;
+}
+
+.movieCastContainer {
+  .slider-container {
+    width: 80%;
+    margin: 0 auto;
+
+    .listItem {
+      max-width: 100%;
+    }
+  }
+}

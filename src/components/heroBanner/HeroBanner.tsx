@@ -22,7 +22,7 @@ const HeroBanner = () => {
     <div className='heroBanner'>
       {!loading && (
         <div className='backDropImage'>
-          <Img src={background} classNmae='backDropImage' />
+          <Img src={background} className='backDropImage' />
         </div>
       )}
       <div className='wrapper'>

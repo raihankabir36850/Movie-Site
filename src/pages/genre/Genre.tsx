@@ -8,6 +8,7 @@ import Container from '../../components/container/Container';
 import Footer from '../../components/footer/Footer';
 import GenreContainer from '../../components/genre/GenreContainer';
 import Loader from '../../components/loader/Loader';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
@@ -18,36 +19,35 @@ const Genre = () => {
   const { loading, data } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
-    const getGenreMoviesData = () => {
-      if (genres.length > 0 && data && data.results) {
-        const isChecked = genres.find((item) => item.id == id);
-        if (isChecked) {
-          setText(isChecked.name);
-          setGenreData((res) => [...res, data?.results].flat());
-        }
-      }
+    // Clear genreData when component unmounts or when genre changes
+    return () => {
+      setGenreData([]);
+      setText('');
+      setPage(1);
     };
-
-    getGenreMoviesData();
-  }, [genres, id, data]);
+  }, [id]);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-        setPage((page) => (page + 1 <= 5 ? page + 1 : page));
+    if (genres.length > 0 && data && data.results) {
+      const isChecked = genres.find((item) => item.id == id);
+      if (isChecked) {
+        setText(isChecked.name);
+        setGenreData((prevData) => [...prevData, ...data.results]);
       }
-    });
-  });
+    }
+  }, [data, genres]);
 
-  console.log('genre', genreData);
+  const fetchData = () => {
+    setPage((prevPage) => (prevPage + 1 <= 5 ? prevPage + 1 : prevPage));
+  };
 
   return (
     <>
-      {loading ? (
+      {loading && genreData.length === 0 ? (
         <Loader />
       ) : (
         <>
-          {!!data && data?.results?.length > 0 ? (
+          {!!genreData && genreData.length > 0 ? (
             <>
               <div className='watchListSection'>
                 <div className='watchListContainer'>
@@ -55,12 +55,15 @@ const Genre = () => {
                     <HeaderTitle text={text} />
                   </div>
                   <div className='watListMovies'>
-                    <Container>
-                      <GenreContainer data={data?.results} />
-                    </Container>
+                    <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true}>
+                      <Container>
+                        <GenreContainer data={genreData} />
+                      </Container>
+                    </InfiniteScroll>
                   </div>
                 </div>
               </div>
+
               <Footer />
             </>
           ) : (

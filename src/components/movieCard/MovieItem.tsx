@@ -14,7 +14,7 @@ const MovieItem = ({ movie }) => {
   return (
     <article id={`post-${id}`} className='movies'>
       <div className='poster'>
-        <Img src={imgUrl} className={''} />
+        <Img src={imgUrl} className={''} alt={movieTitle} />
         <div className='rating'>
           <StarIcon className='movieRating' />
           <span>{voteAverage.toFixed(1)}</span>

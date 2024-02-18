@@ -11,7 +11,7 @@ const CastItem = ({ res }) => {
   return (
     <div key={res.id} className='listItem'>
       <div className='profileImg'>
-        <Img src={imgUrl} className='' />
+        <Img src={imgUrl} className='' alt={res.name} />
       </div>
       <div className='name'>{res.name}</div>
       <div className='character'>{res.character}</div>

@@ -5,6 +5,7 @@ import CastContainer from '../../components/cast/CastContainer';
 import CrewContainer from '../../components/crew/CrewContainer';
 import Similar from '../../components/similar/Similar';
 import Footer from '../../components/footer/Footer';
+import Loader from '../../components/loader/Loader';
 import './Details.scss';
 
 const Details = () => {
@@ -19,7 +20,7 @@ const Details = () => {
             <MovieCard data={data} cast={[]} crew={[]} />
           </div>
         ) : (
-          <h1>loading</h1>
+          <Loader />
         )}
       </div>
 

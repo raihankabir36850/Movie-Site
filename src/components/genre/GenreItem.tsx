@@ -12,7 +12,7 @@ const GenreItem = ({ movie }) => {
   return (
     <article id={`post-${id}`} className='movies'>
       <div className='poster'>
-        <Img src={imgUrl} className={''} />
+        <Img src={imgUrl} className={''} alt={title} />
         <div className='rating'>
           <StarIcon className='movieRating' />
           <span>{vote_average.toFixed(1)}</span>
