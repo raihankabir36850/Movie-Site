@@ -4,6 +4,7 @@ import useFetch from '../../hooks/useFetch';
 import CastContainer from '../../components/cast/CastContainer';
 import CrewContainer from '../../components/crew/CrewContainer';
 import Similar from '../../components/similar/Similar';
+import Footer from '../../components/footer/Footer';
 import './Details.scss';
 
 const Details = () => {
@@ -30,6 +31,7 @@ const Details = () => {
       <div className='similarMoviesSection'>
         <Similar />
       </div>
+      <Footer />
     </>
   );
 };

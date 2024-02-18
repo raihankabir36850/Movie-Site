@@ -1,0 +1,9 @@
+.slick-prev,
+.slick-next {
+  border-radius: 50%;
+}
+
+.slick-prev.slick-disabled,
+.slick-next.slick-disabled {
+  display: none !important;
+}

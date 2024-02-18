@@ -39,7 +39,7 @@ const initialState: MoviesState = {
     profile: '',
   },
   movieDate: false,
-  watchList: JSON.parse(localStorage.getItem('watchList'))?.length > 1 ? JSON.parse(localStorage.getItem('watchList')) : [],
+  watchList: JSON.parse(localStorage.getItem('watchList'))?.length > 0 ? JSON.parse(localStorage.getItem('watchList')) : [],
 };
 
 export const moviesDeatailsSlice = createSlice({

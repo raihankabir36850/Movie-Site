@@ -1,4 +1,11 @@
 .navSection {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 999;
   padding: 24px;
   background-color: #0f0f0f;
+  gap: 50px;
 }

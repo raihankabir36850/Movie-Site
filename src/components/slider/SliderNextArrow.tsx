@@ -2,7 +2,7 @@ import React from 'react';
 
 const SliderNextArrow = (props) => {
   const { className, style, onClick } = props;
-  return <div className={className} style={{ ...style, display: 'block', background: 'red' }} onClick={onClick} />;
+  return <div className={className} style={{ ...style, display: 'block', background: '#120e0e' }} onClick={onClick} />;
 };
 
 export default SliderNextArrow;

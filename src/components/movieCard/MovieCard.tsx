@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux';
 import type { RootState } from '../../store/store';
 import { useDispatch } from 'react-redux';
 import { getWatchListItem } from '../../store/moviesDetails';
+import WatchListButton from '../watchList/WatchListButton';
+import ImdbLogo from '../logo/ImdbLogo';
 import './MovieCard.scss';
 
 const toHoursAndMinutes = (totalMinutes: number) => {
@@ -23,16 +25,19 @@ const formatDate = (dateString: string | number | Date) => {
   return formattedDate;
 };
 
-const MovieCard = ({ data, cast, crew }) => {
+const MovieCard = ({ data }) => {
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const dispatch = useDispatch();
-  const { id, backdrop_path, imdb_id, title, overview, release_date, runtime, vote_average, genres, tagline } = data;
-  const director = crew.filter((item) => item.job === 'Director');
-  const writers = crew.filter((item) => item.job === 'Screenplay' || item.job === 'Story' || item.job === 'Writer');
+  const { id, poster_path, imdb_id, title, overview, release_date, runtime, vote_average, genres, tagline } = data;
+  // const director = crew.filter((item) => item.job === 'Director');
+  // const writers = crew.filter((item) => item.job === 'Screenplay' || item.job === 'Story' || item.job === 'Writer');
 
   const handleAddWatchItem = () => {
     const data = {
       id: id,
+      movieTitle: title,
+      moviePoster: poster_path,
+      voteAverage: vote_average,
       addedDate: formatDate(new Date()),
     };
 
@@ -44,15 +49,15 @@ const MovieCard = ({ data, cast, crew }) => {
     dispatch(getWatchListItem(modifiedWatchList));
   };
 
-  const handleremoveWatchItem = () => {
-    const modifiedList = watchList.filter((item) => item.id !== id);
-    dispatch(getWatchListItem(modifiedList));
-  };
+  // const handleremoveWatchItem = () => {
+  //   const modifiedList = watchList.filter((item) => item.id !== id);
+  //   dispatch(getWatchListItem(modifiedList));
+  // };
 
   return (
     <div className='movieCard'>
       <div className='movieCardWithPoster'>
-        <img src={url.backdrop + backdrop_path} />
+        <img src={url.poster + poster_path} />
       </div>
       <div className='movieCardWithDetails'>
         <div className='movieDetails'>
@@ -77,7 +82,7 @@ const MovieCard = ({ data, cast, crew }) => {
           <div className='movieOtherDetails'>
             <span>Rating: {vote_average.toFixed(1)}</span>
           </div>
-          {director?.length && (
+          {/* {director?.length && (
             <div className='directors'>
               <span>Director: </span>
               <span>
@@ -89,9 +94,8 @@ const MovieCard = ({ data, cast, crew }) => {
                 ))}
               </span>
             </div>
-          )}
-
-          {writers?.length > 0 && (
+          )} */}
+          {/* {writers?.length > 0 && (
             <div className='directors'>
               <span>Writer: </span>
               <span>
@@ -103,19 +107,13 @@ const MovieCard = ({ data, cast, crew }) => {
                 ))}
               </span>
             </div>
-          )}
-
-          <div className='imdbLink'>
-            <a href={`https://www.imdb.com/title/${imdb_id}`} target='blank'>
-              IMDB LINK
-            </a>
+          )} */}
+          <div className='movieLinks'>
+            <div className='imdbLink'>
+              <ImdbLogo url={`https://www.imdb.com/title/${imdb_id}`} />
+            </div>
+            <WatchListButton handleAddWatchItem={() => handleAddWatchItem()} />
           </div>
-          <button type='button' onClick={() => handleAddWatchItem()}>
-            Add to watchlist
-          </button>
-          <button type='button' onClick={() => handleremoveWatchItem()}>
-            remove to watchlist
-          </button>
         </div>
       </div>
     </div>

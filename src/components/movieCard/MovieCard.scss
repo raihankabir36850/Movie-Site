@@ -18,9 +18,12 @@
       }
       .movieCardWithPoster {
         img {
-          width: 450px;
-          height: 400px;
+          width: 400px;
+          height: auto;
           object-fit: cover;
+          @include max-media-query(sm) {
+            max-width: 100%;
+          }
         }
         @include max-media-query(sm) {
           width: 100%;
@@ -44,6 +47,21 @@
           .movieGenre {
             display: flex;
             gap: 5px;
+          }
+          .movieLinks {
+            display: flex;
+            gap: 10px;
+            .watchListContainer {
+              height: 32px;
+              .watchListButton {
+                height: 32px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                padding: 0 5px;
+                cursor: pointer;
+              }
+            }
           }
           @include max-media-query(sm) {
             align-items: center;

@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './SimilarItem.scss';
 import StarIcon from '../icon/StarIcon';
-import WatchListIcon from '../icon/WatchListIcon';
 import { getWatchListItem } from '../../store/moviesDetails';
+import WatchListButton from '../watchList/WatchListButton';
 
 const formatDate = (dateString: string | number | Date) => {
   const date = new Date(dateString);
@@ -45,7 +45,12 @@ const SimilarItem = ({ res }) => {
           <img src={imgUrl} alt={title} />
         </div>
       </Link>
-      {vote_average && (
+      {vote_average ? (
+        <div className='movieRating'>
+          <StarIcon />
+          <span>{vote_average.toFixed(1)}</span>
+        </div>
+      ) : (
         <div className='movieRating'>
           <StarIcon />
           <span>{vote_average.toFixed(1)}</span>
@@ -55,12 +60,7 @@ const SimilarItem = ({ res }) => {
       <div className='movieTitle'>
         <span>{title}</span>
       </div>
-      <div className='watchListContainer'>
-        <button className='watchListButton' onClick={() => handleAddWatchItem()}>
-          <WatchListIcon />
-          <span>Watchlist</span>
-        </button>
-      </div>
+      <WatchListButton handleAddWatchItem={() => handleAddWatchItem()} />
     </div>
   );
 };

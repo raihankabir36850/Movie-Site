@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import SliderNextArrow from './SliderNextArrow';
 import SliderPrevArrow from './SliderPrevArrow';
+import './SliderWrapper.scss';
 
 function SliderWrapper({ children }) {
   const settings = {
