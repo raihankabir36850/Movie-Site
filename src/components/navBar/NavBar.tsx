@@ -6,6 +6,9 @@ const NavBar = () => {
   return (
     <nav className='navSection'>
       <Logo />
+      <label className='hamburgerMenu'>
+        <input type='checkbox' />
+      </label>
       <TopNav />
     </nav>
   );

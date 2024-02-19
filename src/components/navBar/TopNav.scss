@@ -1,3 +1,5 @@
+@import '../../viewport.scss';
+
 .topnav {
   display: flex;
   gap: 20px;
@@ -16,12 +18,11 @@
     display: inline-block;
     &:hover {
       .dropdown-content {
-        display: flex;
-        width: 350px;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-
+        display: block;
+        width: 150px;
+        overflow: auto;
+        height: 50vh;
+        background: #292929;
         a {
           &:hover {
             text-decoration: underline;
@@ -39,6 +40,9 @@
       &:hover {
         opacity: 0.8;
       }
+      &::after {
+        content: ' ▾';
+      }
     }
     .dropdown-content {
       display: none;
@@ -48,7 +52,7 @@
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
       a {
-        color: black;
+        color: #fff;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
@@ -56,5 +60,9 @@
     }
   }
   #watchlist {
+  }
+
+  @include max-media-query(sm) {
+    display: none;
   }
 }
