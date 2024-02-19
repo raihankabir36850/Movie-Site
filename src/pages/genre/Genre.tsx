@@ -13,16 +13,14 @@ import Message from '../../components/message/Message';
 
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
-  const { id } = useParams();
+  const { id, genreType } = useParams();
   const [genreData, setGenreData] = useState([]);
   const [text, setText] = useState(null);
   const [page, setPage] = useState(1);
   const [movieId, setMovieId] = useState(null);
-  // const [flag, setFlag] = useState(true);
   const { loading, data } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
-    // Clear genreData when component unmounts or when genre changes
     return () => {
       setGenreData([]);
       setText(null);
@@ -33,11 +31,11 @@ const Genre = () => {
   useEffect(() => {
     if (genres.length > 0 && data && data.results) {
       const isChecked = genres.find((item) => item.id == id);
-      if (isChecked) {
+      const isCheckedGenre = genres.find((item) => item.name.toLowerCase() == genreType);
+      if (isChecked && isCheckedGenre) {
         setText(isChecked.name);
         setMovieId(isChecked.id);
         setGenreData((prevData) => [...prevData, ...data.results]);
-        //setFlag(false);
       }
     }
   }, [genres, data, id]);
@@ -55,7 +53,7 @@ const Genre = () => {
     return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
   }
 
-  if (!movieId && !text) {
+  if (!text && !loading) {
     return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
   }
 
