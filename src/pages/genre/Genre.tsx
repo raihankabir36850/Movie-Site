@@ -9,20 +9,23 @@ import Footer from '../../components/footer/Footer';
 import GenreContainer from '../../components/genre/GenreContainer';
 import Loader from '../../components/loader/Loader';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Message from '../../components/message/Message';
 
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
   const { id } = useParams();
   const [genreData, setGenreData] = useState([]);
-  const [text, setText] = useState('');
+  const [text, setText] = useState(null);
   const [page, setPage] = useState(1);
+  const [movieId, setMovieId] = useState(null);
+  // const [flag, setFlag] = useState(true);
   const { loading, data } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
     // Clear genreData when component unmounts or when genre changes
     return () => {
       setGenreData([]);
-      setText('');
+      setText(null);
       setPage(1);
     };
   }, [id]);
@@ -32,14 +35,29 @@ const Genre = () => {
       const isChecked = genres.find((item) => item.id == id);
       if (isChecked) {
         setText(isChecked.name);
+        setMovieId(isChecked.id);
         setGenreData((prevData) => [...prevData, ...data.results]);
+        //setFlag(false);
       }
     }
-  }, [data, genres]);
+  }, [genres, data, id]);
 
   const fetchData = () => {
     setPage((prevPage) => (prevPage + 1 <= 5 ? prevPage + 1 : prevPage));
   };
+
+  // if (loading) return <Loader />;
+  // if (genreData.length === 0) {
+  //   return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
+  // }
+
+  if (!movieId && !loading) {
+    return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
+  }
+
+  if (!movieId && !text) {
+    return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
+  }
 
   return (
     <>
@@ -67,7 +85,7 @@ const Genre = () => {
               <Footer />
             </>
           ) : (
-            <p>No data available</p>
+            <Loader />
           )}
         </>
       )}

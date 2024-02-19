@@ -1,0 +1,49 @@
+.message {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* top: 5vh; */
+  /* height: 100vh; */
+  /* top: 50%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  h3 {
+    position: absolute;
+    min-width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    font-size: 36px;
+    align-items: center;
+    animation: scrolling-type 7s infinite linear;
+  }
+  h4 {
+    top: calc(50% + 34px);
+    position: absolute;
+  }
+}
+
+@keyframes scrolling-type {
+  0% {
+    transform: translate(50%, 0%);
+    opacity: 0%;
+  }
+
+  10% {
+    opacity: 100%;
+  }
+  90% {
+    opacity: 100%;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0%;
+  }
+}

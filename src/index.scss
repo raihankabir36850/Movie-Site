@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Nova Square, Poppins, cursive;
   line-height: 1.5;
   font-weight: 400;
 
@@ -10,11 +12,12 @@
   -webkit-text-size-adjust: 100%;
   background-color: #292929;
   color: #fff;
-  --bar-width: 60px;
-  --bar-height: 8px;
-  --hamburger-gap: 6px;
+  --bar-width: 40px;
+  --bar-height: 5px;
+  --hamburger-gap: 4px;
   --transition-timing: 200ms ease-in-out;
   --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+  --toastify-font-family: Nova Square, Poppins, cursive;
 }
 
 * {
@@ -25,6 +28,11 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+button,
+.notification {
+  font-family: Nova Square, Poppins, cursive;
 }
 
 $media: (

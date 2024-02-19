@@ -1,6 +1,8 @@
 import Img from '../lazyLoadImage/Img';
 import type { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import './SimilarItem.scss';
 import StarIcon from '../icon/StarIcon';
@@ -15,7 +17,6 @@ const formatDate = (dateString: string | number | Date) => {
 };
 
 const SimilarItem = ({ res }) => {
-  console.log(res, 'res');
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const { poster_path, title, id, vote_average } = res;
@@ -32,9 +33,34 @@ const SimilarItem = ({ res }) => {
 
     const checkItem = watchList.find((item) => item.id === id);
 
-    if (checkItem) return;
+    if (checkItem) {
+      toast.warn('Already added', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
+
+      return;
+    }
 
     const modifiedWatchList = [...watchList, data];
+
+    toast.success('Add to the watchlist', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: 'colored',
+    });
+
     dispatch(getWatchListItem(modifiedWatchList));
   };
 

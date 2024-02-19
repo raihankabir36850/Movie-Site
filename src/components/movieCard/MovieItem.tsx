@@ -6,7 +6,6 @@ import StarIcon from '../icon/StarIcon';
 import './MovieItem.scss';
 
 const MovieItem = ({ movie }) => {
-  console.log(`Movie`, movie);
   const { url } = useSelector((state: RootState) => state.home);
   const { id, movieTitle, moviePoster, voteAverage, addedDate } = movie;
   const imgUrl = moviePoster ? url.profile + moviePoster : '';

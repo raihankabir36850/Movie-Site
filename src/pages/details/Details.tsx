@@ -6,6 +6,7 @@ import CrewContainer from '../../components/crew/CrewContainer';
 import Similar from '../../components/similar/Similar';
 import Footer from '../../components/footer/Footer';
 import Loader from '../../components/loader/Loader';
+
 import './Details.scss';
 
 const Details = () => {
@@ -16,23 +17,24 @@ const Details = () => {
     <>
       <div className='movieDetailsSection'>
         {!loading && !!data ? (
-          <div className='movieDetailsContainer'>
-            <MovieCard data={data} cast={[]} crew={[]} />
-          </div>
+          <>
+            <div className='movieDetailsContainer'>
+              <MovieCard data={data} cast={[]} crew={[]} />
+            </div>
+            <div className='movieCastContainer'>
+              <CastContainer id={id} />
+
+              {/* <CrewContainer data={[]} /> */}
+            </div>
+            <div className='similarMoviesSection'>
+              <Similar />
+            </div>
+            <Footer />
+          </>
         ) : (
           <Loader />
         )}
       </div>
-
-      <div className='movieCastContainer'>
-        <CastContainer id={id} />
-
-        {/* <CrewContainer data={[]} /> */}
-      </div>
-      <div className='similarMoviesSection'>
-        <Similar />
-      </div>
-      <Footer />
     </>
   );
 };

@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
 import ImdbLogo from '../logo/ImdbLogo';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './MovieCard.scss';
 
 const toHoursAndMinutes = (totalMinutes: number) => {
@@ -43,9 +45,31 @@ const MovieCard = ({ data }) => {
 
     const check = watchList.find((item) => item.id === id);
 
-    if (check) return;
+    if (check) {
+      toast.warn('Already added', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
 
+      return;
+    }
     const modifiedWatchList = [...watchList, data];
+    toast.success('Add to the watchlist', {
+      position: 'top-center',
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: 'colored',
+    });
     dispatch(getWatchListItem(modifiedWatchList));
   };
 

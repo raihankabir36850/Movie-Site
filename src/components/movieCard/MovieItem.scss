@@ -22,7 +22,7 @@
     &:hover {
       img {
         transform: scale(1.2);
-        filter: blur(2px) brightness(0.3);
+        filter: blur(3px) brightness(0.8);
       }
       .rating {
         margin-bottom: 0;
@@ -39,6 +39,27 @@
         border-radius: 5px;
         z-index: 99;
         white-space: nowrap;
+      }
+      .watchListContainer {
+        position: absolute;
+        top: calc(50% + 34px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 10px;
+        .watchListButton {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 17px;
+          background: black;
+          outline: none;
+          border: solid 1px #000;
+          border-radius: 5px;
+          cursor: pointer;
+          span {
+            color: #fff;
+          }
+        }
       }
     }
     span {
@@ -74,6 +95,9 @@
       .movieRating {
         width: 19px;
       }
+    }
+
+    .watchListContainer {
     }
   }
 

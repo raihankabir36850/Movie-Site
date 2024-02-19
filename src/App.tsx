@@ -8,6 +8,8 @@ import WatchList from './pages/watchList/WatchList';
 import PageNotFound from './pages/404/PageNotFound';
 import NavBar from './components/navBar/NavBar';
 import Genre from './pages/genre/Genre';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/home/Home';
 
@@ -52,11 +54,23 @@ const App = () => {
         <Route path='/' element={<Navigate to='/movie' />} />
         <Route path='/movie' element={<Home />} />
         <Route path='/movies/:id' element={<Details />} />
-        <Route path='/movies/:id' element={<Details />} />
         <Route path='/movies/:genreType/:id' element={<Genre />} />
         <Route path='/watchlist' element={<WatchList />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
+      <ToastContainer
+        className='notification'
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='colored'
+      />
     </BrowserRouter>
   );
 };
