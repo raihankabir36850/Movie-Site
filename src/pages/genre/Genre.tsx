@@ -17,15 +17,14 @@ const Genre = () => {
   const [genreData, setGenreData] = useState([]);
   const [text, setText] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalResults, setTotalResults] = useState(null);
   const { loading, data, error } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
-    return () => {
-      setGenreData([]);
-      setText(null);
-      setPage(1);
-    };
-  }, [id]);
+    setGenreData([]);
+    setText(null);
+    setPage(1);
+  }, [id, genreType]);
 
   useEffect(() => {
     if (genres.length > 0 && data && data.results) {
@@ -34,14 +33,17 @@ const Genre = () => {
       if (isChecked && isCheckedGenre) {
         setText(isChecked.name);
         setGenreData((prevData) => [...prevData, ...data.results]);
+        if (!totalResults) {
+          setTotalResults(data.total_pages);
+        }
       } else {
         setText('Error');
       }
     }
-  }, [genres, data, id, genreType]);
+  }, [genres, data]);
 
   const fetchData = () => {
-    setPage((prevPage) => (prevPage + 1 <= 5 ? prevPage + 1 : prevPage));
+    setPage((prevPage) => (totalResults && prevPage < totalResults ? prevPage + 1 : prevPage));
   };
 
   return (
@@ -52,27 +54,26 @@ const Genre = () => {
         <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>
       ) : (
         <>
-          {!!genreData && genreData.length > 0 ? (
-            <>
-              <div className='watchListSection'>
-                <div className='watchListContainer'>
-                  <div className='watListDetails'>
-                    <HeaderTitle text={text} />
-                  </div>
-                  <div className='watListMovies'>
-                    <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true}>
-                      <Container>
-                        <GenreContainer data={genreData} />
-                      </Container>
-                    </InfiniteScroll>
-                  </div>
+          {!!genreData && genreData.length > 0 && (
+            <div className='watchListSection'>
+              <div className='watchListContainer'>
+                <div className='watListDetails'>
+                  <HeaderTitle text={text} />
+                </div>
+                <div className='watListMovies'>
+                  <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true}>
+                    <Container>
+                      <GenreContainer data={genreData} />
+                    </Container>
+                  </InfiniteScroll>
                 </div>
               </div>
-              <Footer />
-            </>
-          ) : text === 'Error' ? (
+            </div>
+          )}
+          {text === 'Error' && (
             <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>
-          ) : null}
+          )}
+          <Footer />
         </>
       )}
     </>
