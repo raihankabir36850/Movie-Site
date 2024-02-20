@@ -17,7 +17,7 @@ const Genre = () => {
   const [genreData, setGenreData] = useState([]);
   const [text, setText] = useState(null);
   const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
   const { loading, data, error } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ const Genre = () => {
       if (isChecked && isCheckedGenre) {
         setText(isChecked.name);
         setGenreData((prevData) => [...prevData, ...data.results]);
-        if (!totalResults) {
-          setTotalResults(data.total_pages);
+        if (!totalPages) {
+          setTotalPages(data.total_pages);
         }
       } else {
         setText('Error');
@@ -43,7 +43,7 @@ const Genre = () => {
   }, [genres, data]);
 
   const fetchData = () => {
-    setPage((prevPage) => (totalResults && prevPage < totalResults ? prevPage + 1 : prevPage));
+    setPage((prevPage) => (totalPages && prevPage < totalPages ? prevPage + 1 : prevPage));
   };
 
   return (

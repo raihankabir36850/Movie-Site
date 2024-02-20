@@ -47,6 +47,10 @@ const App = () => {
     watListItems();
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log('once');
+  }, []);
+
   return (
     <BrowserRouter>
       <NavBar />

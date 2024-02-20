@@ -4,18 +4,13 @@
   text-align: center;
   overflow: hidden;
   position: relative;
-  /* top: 50%; */
-  /* left: 50%; */
-  /* transform: translate(-50%, -50%); */
-  /* top: 5vh; */
-  /* height: 100vh; */
-  /* top: 50%; */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   h3 {
     position: absolute;
+    top: calc(30% - 34px);
     min-width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -25,7 +20,7 @@
     animation: scrolling-type 7s infinite linear;
   }
   h4 {
-    top: calc(50% + 34px);
+    top: calc(30% + 34px);
     position: absolute;
   }
 }
