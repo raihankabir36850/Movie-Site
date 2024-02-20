@@ -17,14 +17,15 @@ const Genre = () => {
   const [genreData, setGenreData] = useState([]);
   const [text, setText] = useState(null);
   const [page, setPage] = useState(1);
-  const [movieId, setMovieId] = useState(null);
-  const { loading, data } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
+  //const [movieId, setMovieId] = useState(null);
+  const { loading, data, error } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
     return () => {
       setGenreData([]);
       setText(null);
       setPage(1);
+      //setMovieId(null);
     };
   }, [id]);
 
@@ -34,33 +35,24 @@ const Genre = () => {
       const isCheckedGenre = genres.find((item) => item.name.toLowerCase() == genreType);
       if (isChecked && isCheckedGenre) {
         setText(isChecked.name);
-        setMovieId(isChecked.id);
+        //setMovieId(isChecked.id);
         setGenreData((prevData) => [...prevData, ...data.results]);
+      } else {
+        setText('Error');
       }
     }
-  }, [genres, data, id]);
+  }, [genres, data, id, genreType]);
 
   const fetchData = () => {
     setPage((prevPage) => (prevPage + 1 <= 5 ? prevPage + 1 : prevPage));
   };
 
-  // if (loading) return <Loader />;
-  // if (genreData.length === 0) {
-  //   return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
-  // }
-
-  if (!movieId && !loading) {
-    return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
-  }
-
-  if (!text && !loading) {
-    return <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>;
-  }
-
   return (
     <>
       {loading && genreData.length === 0 ? (
         <Loader />
+      ) : error ? (
+        <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>
       ) : (
         <>
           {!!genreData && genreData.length > 0 ? (
@@ -79,12 +71,11 @@ const Genre = () => {
                   </div>
                 </div>
               </div>
-
               <Footer />
             </>
-          ) : (
-            <Loader />
-          )}
+          ) : text === 'Error' ? (
+            <Message title='Warning! An error was detected'>Publications at this address of the website are not found or you do not have permissions to view the information at this address.</Message>
+          ) : null}
         </>
       )}
     </>
