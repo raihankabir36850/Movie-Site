@@ -6,12 +6,14 @@ import CrewContainer from '../../components/crew/CrewContainer';
 import Similar from '../../components/similar/Similar';
 import Footer from '../../components/footer/Footer';
 import Loader from '../../components/loader/Loader';
+import Title from '../../components/title/Title';
 
 import './Details.scss';
 
 const Details = () => {
   const { id } = useParams();
-  const { loading, data, error } = useFetch(`movie/${id}`);
+  const { loading, data } = useFetch(`movie/${id}`);
+  const { loading: similarLoading, data: similarData } = useFetch(`movie/${id}/similar?language=en-US&page=1`);
 
   return (
     <>
@@ -26,9 +28,13 @@ const Details = () => {
 
               {/* <CrewContainer data={[]} /> */}
             </div>
-            <div className='similarMoviesSection'>
-              <Similar />
-            </div>
+            {!similarLoading && !!similarData && similarData.results.length > 0 && (
+              <div className='similarMoviesSection'>
+                <Title title='Similar Movies' />
+                <Similar data={similarData.results} />
+              </div>
+            )}
+
             <Footer />
           </>
         ) : (

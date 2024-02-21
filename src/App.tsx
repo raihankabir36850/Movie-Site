@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchData } from './utils/api';
+import { ToastContainer } from 'react-toastify';
 import { getApiConfiguration, getGenreData, getWatchListItem } from './store/moviesDetails';
 import Details from './pages/details/Details';
 import WatchList from './pages/watchList/WatchList';
 import PageNotFound from './pages/404/PageNotFound';
 import NavBar from './components/navBar/NavBar';
 import Genre from './pages/genre/Genre';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/home/Home';
@@ -46,10 +46,6 @@ const App = () => {
 
     watListItems();
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log('once');
-  }, []);
 
   return (
     <BrowserRouter>
