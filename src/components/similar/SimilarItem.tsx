@@ -8,6 +8,7 @@ import './SimilarItem.scss';
 import StarIcon from '../icon/StarIcon';
 import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
+import posterImage from '../../assets/no_poster.jpg';
 
 const formatDate = (dateString: string | number | Date) => {
   const date = new Date(dateString);
@@ -20,7 +21,7 @@ const SimilarItem = ({ res }) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const { poster_path, title, id, vote_average } = res;
-  const imgUrl = poster_path ? url.backdrop + poster_path : '';
+  const imgUrl = poster_path ? url.poster + poster_path : posterImage;
 
   const handleAddWatchItem = () => {
     const data = {

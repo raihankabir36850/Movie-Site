@@ -1,22 +1,24 @@
 import './CastContainer.scss';
 import CastItem from './CastItem';
-import useFetch from '../../hooks/useFetch';
 import Title from '../title/Title';
 import SliderWrapper from '../slider/SliderWrapper';
 
-const CastContainer = ({ id }) => {
-  const { loading, data, error } = useFetch(`movie/${id}/credits`);
+const CastContainer = ({ data }) => {
   return (
     <div className='castHeroSection'>
-      {!loading && !!data && <Title title='Top Cast' />}
-      {!loading && !!data && data.cast.length >= 5 ? (
+      {data.length > 0 && <Title title='Top Cast' />}
+      {data.length >= 5 ? (
         <SliderWrapper>
-          {data.cast.map((item) => (
+          {data.map((item) => (
             <CastItem key={item.id} res={item} />
           ))}
         </SliderWrapper>
       ) : (
-        <div className='castWrapper'>{!loading && !!data && data.cast.map((item) => <CastItem key={item.id} res={item} />)}</div>
+        <div className='castWrapper'>
+          {data.map((item) => (
+            <CastItem key={item.id} res={item} />
+          ))}
+        </div>
       )}
     </div>
   );

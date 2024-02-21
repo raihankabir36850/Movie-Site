@@ -10,13 +10,13 @@ import Container from '../container/Container';
 import GenreContainer from '../genre/GenreContainer';
 import Loader from '../loader/Loader';
 import Similar from '../similar/Similar';
+import Footer from '../footer/Footer';
 
 const MAGIC_NUMBER = 5;
 
-const selectFiveElements = (array, propertyName) => {
+const selectFiveElements = (array) => {
   if (!array.length) return array;
-  const filtered = array.filter((item) => item[propertyName] !== null && item[propertyName] !== undefined);
-  const shuffled = filtered.sort(() => 0.5 - Math.random());
+  const shuffled = array.sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, MAGIC_NUMBER);
   return selected;
 };
@@ -52,18 +52,19 @@ export const ContentWrapper = () => {
     const url = `discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_date.gte=${primaryReleaseDateGte}&primary_release_date.lte=${primaryReleaseDateLte}&sort_by=popularity.desc&with_genres=${genreId}`;
     const response = await fetchData(url);
     if (response?.results) {
-      setGenreData((prevData) => [...prevData, { id: genres[genreIndex].id, name: genres[genreIndex].name, data: selectFiveElements(response.results, 'backdrop_path') }]);
+      setGenreData((prevData) => [...prevData, { id: genres[genreIndex].id, name: genres[genreIndex].name, data: selectFiveElements(response.results) }]);
     }
     setGenreLoading(false);
   };
 
-  // initially render the current dates of movie data
+  // initially for movies for current date
   useEffect(() => {
     if (genres.length && date.startDate && date.endDate) {
       fetchMovies();
     }
   }, [genres.length, pageIndex]);
 
+  // while date is changed
   useEffect(() => {
     if (date.startDate && date.endDate) {
       setGenreIndex(0);
@@ -135,6 +136,7 @@ export const ContentWrapper = () => {
           )}
         </>
       </div>
+      <Footer />
     </div>
   );
 };

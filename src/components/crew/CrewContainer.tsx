@@ -1,3 +1,6 @@
+import Title from '../title/Title';
+import CrewItem from './CrewItem';
+
 const filterByType = (array, type, value) => {
   return array.filter((item) => item[type] === value);
 };
@@ -12,12 +15,15 @@ const CrewContainer = ({ data }) => {
   return (
     <div>
       <>
-        {filteredByProduction.length > 0 && <h1>filteredByProduction: {filteredByProduction.length}</h1>}
-        {filteredBySound.length > 0 && <h1>filteredBySound: {filteredBySound.length}</h1>}
-        {filteredByArt.length > 0 && <h1>filteredByArt: {filteredByArt.length}</h1>}
-        {filteredByEditing.length > 0 && <h1>filteredByEditing: {filteredByEditing.length}</h1>}
-        {filteredByCamera.length > 0 && <h1>filteredByCamera: {filteredByCamera.length}</h1>}
-        {filteredByCostume.length > 0 && <h1>filteredByCostume: {filteredByCostume.length}</h1>}
+        {(filteredByProduction.length || filteredBySound.length || filteredByArt.length || filteredByEditing.length || filteredByCamera.length || filteredByCostume.length) && <Title title='Crews' />}
+        <div className='tabSection'>
+          {filteredByProduction.length > 0 && <CrewItem type='Production' data={filteredByProduction} />}
+          {filteredBySound.length > 0 && <CrewItem type='Sound' data={filteredBySound} />}
+          {filteredByArt.length > 0 && <CrewItem type='Art' data={filteredByArt} />}
+          {filteredByEditing.length > 0 && <CrewItem type='Editing' data={filteredByEditing} />}
+          {filteredByCamera.length > 0 && <CrewItem type='Camrera' data={filteredByCamera} />}
+          {filteredByCostume.length > 0 && <CrewItem type='Costume' data={filteredByCostume} />}
+        </div>
       </>
     </div>
   );

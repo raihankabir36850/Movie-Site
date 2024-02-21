@@ -6,6 +6,7 @@ import Img from '../lazyLoadImage/Img';
 import StarIcon from '../icon/StarIcon';
 import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
+import posterImage from '../../assets/no_poster.jpg';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -20,7 +21,7 @@ const GenreItem = ({ movie }) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const { id, title, poster_path, vote_average, release_date } = movie;
-  const imgUrl = poster_path ? url.profile + poster_path : '';
+  const imgUrl = poster_path ? url.poster + poster_path : posterImage;
 
   const handleAddWatchItem = () => {
     const data = {

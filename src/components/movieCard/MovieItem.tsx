@@ -8,7 +8,7 @@ import './MovieItem.scss';
 const MovieItem = ({ movie }) => {
   const { url } = useSelector((state: RootState) => state.home);
   const { id, movieTitle, moviePoster, voteAverage, addedDate } = movie;
-  const imgUrl = moviePoster ? url.profile + moviePoster : '';
+  const imgUrl = moviePoster ? url.poster + moviePoster : '';
 
   return (
     <article id={`post-${id}`} className='movies'>

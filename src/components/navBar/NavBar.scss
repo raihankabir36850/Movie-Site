@@ -1,7 +1,7 @@
 @import '../../viewport.scss';
 
 .navSection {
-  position: relative;
+  position: sticky;
   display: flex;
   align-items: center;
   top: 0;

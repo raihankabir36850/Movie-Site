@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
 import ImdbLogo from '../logo/ImdbLogo';
+import posterImage from '../../assets/no_poster.jpg';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MovieCard.scss';
@@ -27,12 +28,14 @@ const formatDate = (dateString: string | number | Date) => {
   return formattedDate;
 };
 
-const MovieCard = ({ data }) => {
+const MovieCard = ({ data, castData }) => {
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const dispatch = useDispatch();
   const { id, poster_path, imdb_id, title, overview, release_date, runtime, vote_average, genres, tagline } = data;
-  // const director = crew.filter((item) => item.job === 'Director');
-  // const writers = crew.filter((item) => item.job === 'Screenplay' || item.job === 'Story' || item.job === 'Writer');
+  const imgUrl = poster_path ? url.poster + poster_path : posterImage;
+
+  const director = castData?.crew.filter((item) => item.job === 'Director');
+  const writers = castData?.crew.filter((item) => item.job === 'Screenplay' || item.job === 'Story' || item.job === 'Writer');
 
   const handleAddWatchItem = () => {
     const data = {
@@ -81,17 +84,17 @@ const MovieCard = ({ data }) => {
   return (
     <div className='movieCard'>
       <div className='movieCardWithPoster'>
-        <img src={url.poster + poster_path} />
+        <img src={imgUrl} />
       </div>
       <div className='movieCardWithDetails'>
         <div className='movieDetails'>
           <h1 className='movieTitle'>
-            {title} ({getYearFromDate(release_date)})
+            {title} {release_date && <span>({getYearFromDate(release_date)})</span>}
           </h1>
           {tagline && <p className='movieTagLine'>{tagline}</p>}
           <div className='movieInfo'>
             <span className='status'>Status : Released</span>
-            <span className='releaseDate'>Release Date : {formatDate(release_date)}</span>
+            <span className='releaseDate'>Release Date : {release_date ? formatDate(release_date) : 'N/A'}</span>
             <span className='duration'>Runtime : {toHoursAndMinutes(runtime)}</span>
           </div>
           <div className='movieGenre'>
@@ -106,7 +109,8 @@ const MovieCard = ({ data }) => {
           <div className='movieOtherDetails'>
             <span>Rating: {vote_average.toFixed(1)}</span>
           </div>
-          {/* {director?.length && (
+
+          {director?.length > 0 && (
             <div className='directors'>
               <span>Director: </span>
               <span>
@@ -118,8 +122,9 @@ const MovieCard = ({ data }) => {
                 ))}
               </span>
             </div>
-          )} */}
-          {/* {writers?.length > 0 && (
+          )}
+
+          {writers?.length > 0 && (
             <div className='directors'>
               <span>Writer: </span>
               <span>
@@ -131,7 +136,8 @@ const MovieCard = ({ data }) => {
                 ))}
               </span>
             </div>
-          )} */}
+          )}
+
           <div className='movieLinks'>
             <div className='imdbLink'>
               <ImdbLogo url={`https://www.imdb.com/title/${imdb_id}`} />
