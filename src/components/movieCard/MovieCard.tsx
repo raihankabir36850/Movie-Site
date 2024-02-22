@@ -53,7 +53,7 @@ interface MovieData {
 
 interface MovieDataProps {
   data: MovieData;
-  castData: CastData; // Specify type for castData prop
+  castData: CastData;
 }
 
 const MovieCard = ({ data, castData }: MovieDataProps) => {
@@ -103,11 +103,6 @@ const MovieCard = ({ data, castData }: MovieDataProps) => {
     });
     dispatch(getWatchListItem(modifiedWatchList));
   };
-
-  // const handleremoveWatchItem = () => {
-  //   const modifiedList = watchList.filter((item) => item.id !== id);
-  //   dispatch(getWatchListItem(modifiedList));
-  // };
 
   return (
     <div className='movieCard'>
