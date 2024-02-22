@@ -4,7 +4,26 @@ import Img from '../lazyLoadImage/Img';
 import Avater from '../../assets/avater.jpg';
 import './CastItem.scss';
 
-const CastItem = ({ res }) => {
+interface CastMember {
+  adult: boolean;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  order: number;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null; // Assuming profile_path could be null
+}
+
+interface CastItemProps {
+  res: CastMember;
+}
+
+const CastItem = ({ res }: CastItemProps) => {
   const { url } = useSelector((state: RootState) => state.home);
   const imgUrl = res.profile_path ? url.profile + res.profile_path : Avater;
 

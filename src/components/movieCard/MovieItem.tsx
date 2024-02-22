@@ -5,7 +5,19 @@ import Img from '../lazyLoadImage/Img';
 import StarIcon from '../icon/StarIcon';
 import './MovieItem.scss';
 
-const MovieItem = ({ movie }) => {
+interface MovieData {
+  id: number;
+  movieTitle: string;
+  moviePoster: string;
+  voteAverage: number;
+  addedDate: string;
+}
+
+interface MovieDataProps {
+  movie: MovieData;
+}
+
+const MovieItem = ({ movie }: MovieDataProps) => {
   const { url } = useSelector((state: RootState) => state.home);
   const { id, movieTitle, moviePoster, voteAverage, addedDate } = movie;
   const imgUrl = moviePoster ? url.poster + moviePoster : '';

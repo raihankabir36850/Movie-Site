@@ -4,6 +4,20 @@ import type { RootState } from '../../store/store';
 
 import './TopNav.scss';
 
+// interface Genre {
+//   id: number;
+//   name: string;
+// }
+
+// interface HomeState {
+//   genres: Genre[];
+//   // Other properties if any...
+// }
+
+// interface RootState {
+//   home: HomeState;
+// }
+
 const TopNav = () => {
   const { genres } = useSelector((state: RootState) => state.home);
   return (

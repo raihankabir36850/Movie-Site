@@ -1,6 +1,12 @@
+import { ReactNode } from 'react';
 import './Message.scss';
 
-const Meassage = ({ title, children }) => {
+interface MessageProps {
+  title: string;
+  children: ReactNode;
+}
+
+const Meassage = ({ title, children }: MessageProps) => {
   return (
     <div className='message'>
       <h3>{title}</h3>

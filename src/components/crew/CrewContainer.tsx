@@ -2,10 +2,28 @@ import Title from '../title/Title';
 import CrewItem from './CrewItem';
 import './CrewContainer.scss';
 
-const filterByType = (array, type, value) => {
+interface CrewContainerData {
+  adult: boolean;
+  credit_id: string;
+  department: string;
+  gender: number;
+  id: number;
+  job: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: string;
+  profile_path: string | null;
+}
+
+interface CrewContainerProps {
+  data: CrewContainerData[];
+}
+
+const filterByType = (array: any[], type: string, value: string) => {
   return array.filter((item) => item[type] === value);
 };
-const CrewContainer = ({ data }) => {
+const CrewContainer = ({ data }: CrewContainerProps) => {
   const filteredByProduction = filterByType(data, 'known_for_department', 'Production');
   const filteredBySound = filterByType(data, 'known_for_department', 'Sound');
   const filteredByArt = filterByType(data, 'known_for_department', 'Art');

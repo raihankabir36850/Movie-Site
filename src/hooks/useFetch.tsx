@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../utils/api';
 
-export const useFetch = (url: string) => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+function useFetch<T>(url: string): { loading: boolean; data: T | null; error: Error | null | string } {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null | string>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -23,6 +23,6 @@ export const useFetch = (url: string) => {
   }, [url]);
 
   return { loading, data, error };
-};
+}
 
 export default useFetch;

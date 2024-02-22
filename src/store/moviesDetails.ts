@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+
+const watchListString = localStorage.getItem('watchList');
+const watchList = watchListString ? JSON.parse(watchListString) : [];
 
 interface MoviesState {
   isLoading: boolean;
@@ -13,11 +15,13 @@ interface MoviesState {
     profile: string;
   };
   genres: Array<{
+    name: any;
     id: number;
     title: string;
   }>;
   movieDate: boolean;
   watchList: Array<{
+    id: number;
     movieId: number;
     movieTitle: string;
     moviePoster: string;
@@ -39,7 +43,7 @@ const initialState: MoviesState = {
     profile: '',
   },
   movieDate: false,
-  watchList: JSON.parse(localStorage.getItem('watchList'))?.length > 0 ? JSON.parse(localStorage.getItem('watchList')) : [],
+  watchList: watchList,
 };
 
 export const moviesDeatailsSlice = createSlice({

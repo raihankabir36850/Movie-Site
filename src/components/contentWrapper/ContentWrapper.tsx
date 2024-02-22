@@ -1,8 +1,7 @@
 import './ContentWrapper.scss';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '@reduxjs/toolkit/query';
-import { getMoviesDate } from '../../store/moviesDetails';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store/store';
 import { fetchData } from '../../utils/api';
 import Title from '../title/Title';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -14,22 +13,43 @@ import Footer from '../footer/Footer';
 
 const MAGIC_NUMBER = 5;
 
-const selectFiveElements = (array) => {
+const selectFiveElements = (array: any[]) => {
   if (!array.length) return array;
   const shuffled = array.sort(() => 0.5 - Math.random());
   const selected = shuffled.slice(0, MAGIC_NUMBER);
   return selected;
 };
 
+interface MovieData {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface GenreData {
+  id: number;
+  name: string;
+  data: MovieData[];
+}
+
 export const ContentWrapper = () => {
   const { genres, date } = useSelector((state: RootState) => state.home);
-  const [moviedata, setMovieData] = useState([]);
-  const [genredata, setGenreData] = useState([]);
+  const [moviedata, setMovieData] = useState<MovieData[]>([]);
+  const [genredata, setGenreData] = useState<GenreData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [genreLoading, setGenreLoading] = useState(true);
+  const [, setGenreLoading] = useState(true);
   const [genreIndex, setGenreIndex] = useState(0);
-  const [pageIndex, setPageIndex] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
+  const [pageIndex, setPageIndex] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
 
   const fetchMovies = async (flag = false) => {
     setLoading(true);
@@ -98,7 +118,7 @@ export const ContentWrapper = () => {
           <>
             {moviedata && moviedata.length ? (
               <div className='allMoviesSection'>
-                <InfiniteScroll dataLength={moviedata.length} next={fetchNextData} hasMore={true}>
+                <InfiniteScroll dataLength={moviedata.length} next={fetchNextData} hasMore={true} loader={pageIndex <= 5 ? <p className='customLoading'>Loading...</p> : null}>
                   <Container>
                     <GenreContainer data={moviedata} />
                   </Container>
@@ -114,7 +134,7 @@ export const ContentWrapper = () => {
         <>
           {genredata && genredata.length > 0 && (
             <div className='allMoviesSection'>
-              <InfiniteScroll dataLength={genredata.length} next={fetchNextGenreData} hasMore={true}>
+              <InfiniteScroll dataLength={genredata.length} next={fetchNextGenreData} hasMore={true} loader={genreIndex < genres.length ? <p className='customLoading'>Loading...</p> : null}>
                 <div className='similarMoviesSection'>
                   {genredata.map((data) => {
                     return (

@@ -1,7 +1,7 @@
 import './WatchListButton.scss';
 import WatchListIcon from '../icon/WatchListIcon';
 
-const WatchListButton = ({ handleAddWatchItem }) => {
+const WatchListButton = ({ handleAddWatchItem }: any) => {
   return (
     <div className='watchListContainer'>
       <button className='watchListButton' onClick={handleAddWatchItem}>

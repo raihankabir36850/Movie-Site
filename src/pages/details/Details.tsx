@@ -1,4 +1,5 @@
 import MovieCard from '../../components/movieCard/MovieCard';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useFetch from '../../hooks/useFetch';
 import CastContainer from '../../components/cast/CastContainer';
@@ -10,10 +11,9 @@ import Title from '../../components/title/Title';
 import Message from '../../components/message/Message';
 
 import './Details.scss';
-import { useEffect, useState } from 'react';
 
 const Details = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string; genreType: string }>();
   const [showError, setShowError] = useState(false);
   const { loading, data } = useFetch(`movie/${id}`);
   const { loading: castLoading, data: castData } = useFetch(`movie/${id}/credits`);
@@ -24,7 +24,8 @@ const Details = () => {
   }, [id]);
 
   useEffect(() => {
-    if (data && !data?.success) {
+    if (data && (!data?.success || {})) {
+      console.log('eror data', data);
       setShowError(true);
     }
   }, [data]);

@@ -12,30 +12,60 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Message from '../../components/message/Message';
 import './Genre.scss';
 
+interface MovieData {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface GenreData {
+  page: number;
+  results: any[];
+  total_pages: number;
+  total_results: number;
+}
+
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
-  const { id, genreType } = useParams();
-  const [genreData, setGenreData] = useState([]);
-  const [text, setText] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
-  const { loading, data, error } = useFetch(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
+  const { id, genreType } = useParams<{ id: string; genreType: string }>(); // Correct type for useParams
+  const [genreData, setGenreData] = useState<MovieData[]>([]); // Correct type for genreData
+  const [text, setText] = useState<string>(''); // Correct type for text
+  const [page, setPage] = useState<number>(1); // Correct type for page
+  const [totalPages, setTotalPages] = useState<number | null>(null); // Correct type for totalPages
+  const { loading, data, error } = useFetch<GenreData>(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id}`);
+  // const { genres } = useSelector((state: RootState) => state.home);
+  // const { id, genreType } = useParams();
+  // const [genreData, setGenreData] = useState<MovieData[]>([]);
+  // const [text, setText] = useState('');
+  // const [page, setPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState<number | null>(null);
+  // const { loading, data, error } = useFetch<GenreData>(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
     setGenreData([]);
-    setText(null);
+    setText('');
     setPage(1);
   }, [id, genreType]);
 
   useEffect(() => {
     if (genres.length > 0 && data && data.results) {
-      const isChecked = genres.find((item) => item.id == id);
+      const isChecked = genres.find((item) => item.id.toString() === id);
       const isCheckedGenre = genres.find((item) => item.name.toLowerCase() == genreType);
       if (isChecked && isCheckedGenre) {
         setText(isChecked.name);
-        setGenreData((prevData) => [...prevData, ...data.results]);
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        setGenreData((prevData) => [...prevData, ...data?.results]);
         if (!totalPages) {
-          setTotalPages(5 || data.total_pages);
+          setTotalPages(5 || data?.total_pages);
         }
       } else {
         setText('Error');
@@ -62,7 +92,7 @@ const Genre = () => {
                   <HeaderTitle text={text} />
                 </div>
                 <div className='watListMovies'>
-                  <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true}>
+                  <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true} loader={page <= 5 ? <p className='customLoading'>Loading...</p> : null}>
                     <Container>
                       <GenreContainer data={genreData} />
                     </Container>

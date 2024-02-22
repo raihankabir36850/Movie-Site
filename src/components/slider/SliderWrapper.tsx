@@ -1,19 +1,22 @@
+import { ReactNode } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import SliderNextArrow from './SliderNextArrow';
-import SliderPrevArrow from './SliderPrevArrow';
+// import SliderNextArrow from './SliderNextArrow';
+// import SliderPrevArrow from './SliderPrevArrow';
 import './SliderWrapper.scss';
 
-function SliderWrapper({ children }) {
+interface ContainerProps {
+  children: ReactNode;
+}
+
+function SliderWrapper({ children }: ContainerProps) {
   const settings = {
     dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    nextArrow: <SliderNextArrow />,
-    prevArrow: <SliderPrevArrow />,
     responsive: [
       {
         breakpoint: 1024,

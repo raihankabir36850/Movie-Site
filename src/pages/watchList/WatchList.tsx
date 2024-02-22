@@ -9,7 +9,9 @@ import Footer from '../../components/footer/Footer';
 import './WatchList.scss';
 
 const WatchList = () => {
-  const [data, setData] = useState(JSON.parse(localStorage.getItem('watchList'))?.length > 1 ? JSON.parse(localStorage.getItem('watchList')) : []);
+  const watchListString = localStorage.getItem('watchList');
+  const watchListItems = watchListString ? JSON.parse(watchListString) : [];
+  const [data, setData] = useState(watchListItems.length > 1 ? watchListItems : []);
   const { watchList } = useSelector((state: RootState) => state.home);
 
   useEffect(() => {

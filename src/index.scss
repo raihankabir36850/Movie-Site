@@ -35,6 +35,10 @@ button,
   font-family: Nova Square, Poppins, cursive;
 }
 
+.customLoading {
+  display: none;
+}
+
 $media: (
   xsm: 360px,
   sm: 768px,

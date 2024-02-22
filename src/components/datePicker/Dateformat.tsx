@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
-import type { RootState } from '@reduxjs/toolkit/query';
-
+import type { RootState } from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDate } from '../../store/moviesDetails';
-
 import 'react-datepicker/dist/react-datepicker.css';
 import { getDateRange, formatDate } from '../../utils/dateFormat';
 

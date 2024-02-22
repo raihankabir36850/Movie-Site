@@ -1,7 +1,11 @@
 import './ImdbLogo.scss';
 import { Link } from 'react-router-dom';
 
-const ImdbLogo = ({ url }) => {
+interface UrlProps {
+  url: string;
+}
+
+const ImdbLogo = ({ url }: UrlProps) => {
   return (
     <Link to={url}>
       <svg id='home_img' className='ipc-logo' xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32' version='1.1'>

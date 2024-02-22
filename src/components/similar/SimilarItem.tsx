@@ -1,4 +1,3 @@
-import Img from '../lazyLoadImage/Img';
 import type { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -10,14 +9,37 @@ import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
 import posterImage from '../../assets/no_poster.jpg';
 
+// interface OptionTypes {
+//   year: string;
+//   month: string;
+//   day: string;
+// }
+interface MovieData {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface MovieDataProps {
+  res: MovieData;
+}
+
 const formatDate = (dateString: string | number | Date) => {
   const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', options);
+  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   return formattedDate;
 };
 
-const SimilarItem = ({ res }) => {
+const SimilarItem = ({ res }: MovieDataProps) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const { poster_path, title, id, vote_average } = res;
@@ -74,12 +96,12 @@ const SimilarItem = ({ res }) => {
       </Link>
       {vote_average ? (
         <div className='movieRating'>
-          <StarIcon />
+          <StarIcon className='' />
           <span>{vote_average.toFixed(1)}</span>
         </div>
       ) : (
         <div className='movieRating'>
-          <StarIcon />
+          <StarIcon className='' />
           <span>{vote_average.toFixed(1)}</span>
         </div>
       )}

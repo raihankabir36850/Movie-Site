@@ -10,14 +10,33 @@ import posterImage from '../../assets/no_poster.jpg';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+interface GenreItemData {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface GenreItemDataProps {
+  movie: GenreItemData;
+}
+
 const formatDate = (dateString: string | number | Date) => {
   const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', options);
+  //const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   return formattedDate;
 };
 
-const GenreItem = ({ movie }) => {
+const GenreItem = ({ movie }: GenreItemDataProps) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const { id, title, poster_path, vote_average, release_date } = movie;

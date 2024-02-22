@@ -1,5 +1,10 @@
 import './Title.scss';
-const Title = ({ title }) => {
+
+interface TitleProps {
+  title: string;
+}
+
+const Title = ({ title }: TitleProps) => {
   return (
     <h3 className='titleText'>
       <span>{title}</span>

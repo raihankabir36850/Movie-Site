@@ -6,9 +6,16 @@ import DateFormat from '../datePicker/Dateformat';
 import Img from '../lazyLoadImage/Img';
 import './HeroBanner.scss';
 
+interface HeroBannerData {
+  page: number;
+  results: any[];
+  total_pages: number;
+  total_results: number;
+}
+
 const HeroBanner = () => {
   const [background, setBackGround] = useState<string>('');
-  const { loading, data } = useFetch('movie/upcoming');
+  const { loading, data } = useFetch<HeroBannerData>('movie/upcoming');
 
   const { url } = useSelector((state: RootState) => state.home);
 
@@ -22,7 +29,7 @@ const HeroBanner = () => {
     <div className='heroBanner'>
       {!loading && (
         <div className='backDropImage'>
-          <Img src={background} className='backDropImage' />
+          <Img src={background} className='backDropImage' alt='hero-banner' />
         </div>
       )}
       <div className='wrapper'>
@@ -30,7 +37,12 @@ const HeroBanner = () => {
           <span className='title'>Hey Movie Lovers</span>
           <span className='subTitle'>Search your favoutite movies by selecting your certain dates </span>
           <div className='datePicker'>
-            <DateFormat />
+            <DateFormat
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              onChange={function (_date: Date | null): void {
+                throw new Error('Function not implemented.');
+              }}
+            />
           </div>
         </div>
       </div>

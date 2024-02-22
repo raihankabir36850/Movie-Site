@@ -1,6 +1,11 @@
+import { ReactNode } from 'react';
 import './HeaderDes.scss';
 
-const HeaderDes = ({ children }) => {
+interface ContainerProps {
+  children: ReactNode;
+}
+
+const HeaderDes = ({ children }: ContainerProps) => {
   return <div className='descCategory'>{children}</div>;
 };
 

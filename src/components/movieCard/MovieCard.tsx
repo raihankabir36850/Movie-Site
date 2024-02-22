@@ -23,12 +23,40 @@ const getYearFromDate = (dateString: string) => {
 
 const formatDate = (dateString: string | number | Date) => {
   const date = new Date(dateString);
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', options);
+  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   return formattedDate;
 };
 
-const MovieCard = ({ data, castData }) => {
+interface CastData {
+  id: number;
+  cast: any[]; // Define proper type for cast array if possible
+  crew: any[]; // Define proper type for crew array if possible
+}
+interface MovieData {
+  adult: boolean;
+  backdrop_path: string;
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  imdb_id: string;
+  runtime: number;
+  tagline: string;
+  genres: Array<{ id: number; name: string }>;
+}
+
+interface MovieDataProps {
+  data: MovieData;
+  castData: CastData; // Specify type for castData prop
+}
+
+const MovieCard = ({ data, castData }: MovieDataProps) => {
   const { url, watchList } = useSelector((state: RootState) => state.home);
   const dispatch = useDispatch();
   const { id, poster_path, imdb_id, title, overview, release_date, runtime, vote_average, genres, tagline } = data;
