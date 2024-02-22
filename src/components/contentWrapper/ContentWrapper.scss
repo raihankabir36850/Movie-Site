@@ -1,2 +1,19 @@
 .contentWrapper {
+  .moviesContainer {
+    .containerWrapper {
+      padding: 0px;
+    }
+  }
+  .genresContainer {
+    margin-top: 25px;
+    .similarMoviesSection {
+      padding: 0;
+      .section {
+        margin-bottom: 25px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }

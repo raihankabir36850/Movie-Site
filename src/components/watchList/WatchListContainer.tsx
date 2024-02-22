@@ -2,9 +2,10 @@ import MovieItem from '../movieCard/MovieItem';
 import './WatchListContainer.scss';
 
 function WatchListContainer({ data }) {
+  const modifiedData = [...data].reverse();
   return (
     <div className='watchlist'>
-      {data.map((item) => (
+      {modifiedData.map((item) => (
         <MovieItem key={item.id} movie={item}></MovieItem>
       ))}
     </div>

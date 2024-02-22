@@ -53,7 +53,6 @@ const Details = () => {
                 <Similar data={similarData.results} />
               </div>
             )}
-
             <Footer />
           </>
         ) : (

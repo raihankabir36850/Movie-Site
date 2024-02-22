@@ -1,64 +1,72 @@
 @import '../../index.scss';
 
-.heroBanner {
-  width: 100%;
-  height: 450px;
-  background-color: #292929;
-  position: relative;
-  @include min-media-query(sm) {
-    height: 650px;
-  }
-  .backDropImage {
+.homePage-section {
+  margin-bottom: 64px;
+  .heroBanner {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    opacity: 0.5;
-    .lazy-load-image-background {
+    height: 450px;
+    background-color: #292929;
+    position: relative;
+    @include min-media-query(sm) {
+      height: 650px;
+    }
+
+    .backDropImage {
       width: 100%;
       height: 100%;
-      img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      opacity: 0.5;
+      .lazy-load-image-background {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
       }
     }
-  }
-  .wrapper {
-    .heroBannerContent {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      max-width: 700px;
-      .title {
-        font-size: 40px;
-        font-weight: 700;
-        line-height: 1.5;
-      }
-      .subTitle {
-        font-size: 24px;
-        font-weight: 500;
-      }
-      .datePicker {
-        margin-top: 10px;
-        .react-datepicker-wrapper {
-          .react-datepicker__input-container {
-            input {
-              padding: 10px 20px;
+    .wrapper {
+      .heroBannerContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        max-width: 700px;
+        .title {
+          font-size: 40px;
+          font-weight: 700;
+          line-height: 1.5;
+        }
+        .subTitle {
+          font-size: 24px;
+          font-weight: 500;
+        }
+        .datePicker {
+          margin-top: 10px;
+          .react-datepicker-wrapper {
+            .react-datepicker__input-container {
+              input {
+                padding: 10px 20px;
+              }
             }
           }
         }
       }
     }
+  }
+
+  .contentWrapper {
+    padding: 25px;
   }
 }

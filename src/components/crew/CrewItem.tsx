@@ -1,7 +1,6 @@
 import './CrewItem.scss';
 
 const CrewItem = ({ type, data }) => {
-  console.log(data);
   return (
     <div className='tab'>
       <input type='checkbox' name={`accordion-${type}`} id={`${type}`} defaultChecked={false} />

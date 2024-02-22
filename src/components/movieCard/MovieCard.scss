@@ -2,6 +2,7 @@
 
 .movieDetailsSection {
   background: #292929;
+  margin-bottom: 64px;
   .movieDetailsContainer {
     max-width: 1200px;
     width: 100%;
@@ -21,6 +22,7 @@
           width: 400px;
           height: auto;
           object-fit: cover;
+          border-radius: 30px;
           @include max-media-query(sm) {
             max-width: 100%;
           }
@@ -43,6 +45,10 @@
           .movieInfo {
             display: flex;
             gap: 10px;
+            & > div {
+              display: flex;
+              flex-direction: column;
+            }
           }
           .movieGenre {
             display: flex;
@@ -54,12 +60,14 @@
             .watchListContainer {
               height: 32px;
               .watchListButton {
-                height: 32px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
-                padding: 0 5px;
+                padding: 6px 5px;
                 cursor: pointer;
+                background: #000;
+                color: #fff;
+                border: none;
               }
             }
           }

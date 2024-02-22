@@ -93,9 +93,18 @@ const MovieCard = ({ data, castData }) => {
           </h1>
           {tagline && <p className='movieTagLine'>{tagline}</p>}
           <div className='movieInfo'>
-            <span className='status'>Status : Released</span>
-            <span className='releaseDate'>Release Date : {release_date ? formatDate(release_date) : 'N/A'}</span>
-            <span className='duration'>Runtime : {toHoursAndMinutes(runtime)}</span>
+            <div className='status'>
+              <span>Status</span>
+              <span>Released</span>
+            </div>
+            <div className='releaseDate'>
+              <span>Release Date</span>
+              <span>{release_date ? formatDate(release_date) : 'N/A'}</span>
+            </div>
+            <div className='duration'>
+              <span>Runtime</span>
+              <span>{runtime ? toHoursAndMinutes(runtime) : 'N/A'}</span>
+            </div>
           </div>
           <div className='movieGenre'>
             {genres.map((element, index) => (

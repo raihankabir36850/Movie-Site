@@ -10,6 +10,7 @@ import GenreContainer from '../../components/genre/GenreContainer';
 import Loader from '../../components/loader/Loader';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Message from '../../components/message/Message';
+import './Genre.scss';
 
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
@@ -34,7 +35,7 @@ const Genre = () => {
         setText(isChecked.name);
         setGenreData((prevData) => [...prevData, ...data.results]);
         if (!totalPages) {
-          setTotalPages(data.total_pages);
+          setTotalPages(5 || data.total_pages);
         }
       } else {
         setText('Error');
