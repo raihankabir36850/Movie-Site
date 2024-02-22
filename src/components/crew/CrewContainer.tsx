@@ -33,7 +33,9 @@ const CrewContainer = ({ data }: CrewContainerProps) => {
 
   return (
     <div className='crewContainer'>
-      {(filteredByProduction.length || filteredBySound.length || filteredByArt.length || filteredByEditing.length || filteredByCamera.length || filteredByCostume.length) && <Title title='Crews' />}
+      {(filteredByProduction.length > 0 || filteredBySound.length > 0 || filteredByArt.length > 0 || filteredByEditing.length > 0 || filteredByCamera.length > 0 || filteredByCostume.length > 0) && (
+        <Title title='Crews' />
+      )}
       <div className='tabSection'>
         {filteredByProduction.length > 0 && <CrewItem type='Production' data={filteredByProduction} />}
         {filteredBySound.length > 0 && <CrewItem type='Sound' data={filteredBySound} />}

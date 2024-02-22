@@ -89,7 +89,6 @@ const Details = () => {
 
   useEffect(() => {
     if (data && (!data?.success || {})) {
-      console.log('eror data', data);
       setShowError(true);
     }
   }, [data]);
