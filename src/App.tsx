@@ -40,8 +40,11 @@ const App = () => {
 
   useEffect(() => {
     const watListItems = () => {
-      const items = JSON.parse(localStorage.getItem('watchList'))?.length > 0 ? JSON.parse(localStorage.getItem('watchList')) : [];
+      const watchListString = localStorage.getItem('watchList');
+      const items = watchListString ? JSON.parse(watchListString) : [];
       dispatch(getWatchListItem(items));
+      // const items = JSON.parse(localStorage.getItem('watchList'))?.length > 0 ? JSON.parse(localStorage.getItem('watchList')) : [];
+      // dispatch(getWatchListItem(items));
     };
 
     watListItems();
