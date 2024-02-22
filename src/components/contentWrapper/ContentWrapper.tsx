@@ -145,7 +145,7 @@ export const ContentWrapper = () => {
                             <Similar data={data.data} />
                           </div>
                         ) : (
-                          <p>no data available</p>
+                          <h1 className='noItemContainer'>no item is available.</h1>
                         )}
                       </div>
                     );

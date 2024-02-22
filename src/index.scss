@@ -39,6 +39,11 @@ button,
   display: none;
 }
 
+.noItemContainer {
+  text-align: center;
+  margin: 20px 0;
+}
+
 $media: (
   xsm: 360px,
   sm: 768px,

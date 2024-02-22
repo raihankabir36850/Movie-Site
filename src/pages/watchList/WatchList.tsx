@@ -38,7 +38,7 @@ const WatchList = () => {
           <Footer />
         </>
       ) : (
-        <h1>no item is available.</h1>
+        <h1 className='noItemContainer'>no item is available.</h1>
       )}
     </>
   );
