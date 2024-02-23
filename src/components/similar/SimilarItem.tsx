@@ -9,11 +9,6 @@ import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
 import posterImage from '../../assets/no_poster.jpg';
 
-// interface OptionTypes {
-//   year: string;
-//   month: string;
-//   day: string;
-// }
 interface MovieData {
   adult: boolean;
   backdrop_path: string;

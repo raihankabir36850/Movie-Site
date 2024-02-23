@@ -3,6 +3,7 @@ import type { RootState } from '../../store/store';
 import { Link } from 'react-router-dom';
 import Img from '../lazyLoadImage/Img';
 import StarIcon from '../icon/StarIcon';
+import PosterImage from '../../assets/no_poster.jpg';
 import './MovieItem.scss';
 
 interface MovieData {
@@ -20,7 +21,7 @@ interface MovieDataProps {
 const MovieItem = ({ movie }: MovieDataProps) => {
   const { url } = useSelector((state: RootState) => state.home);
   const { id, movieTitle, moviePoster, voteAverage, addedDate } = movie;
-  const imgUrl = moviePoster ? url.poster + moviePoster : '';
+  const imgUrl = moviePoster ? url.poster + moviePoster : PosterImage;
 
   return (
     <article id={`post-${id}`} className='movies'>

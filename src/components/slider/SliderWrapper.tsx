@@ -2,15 +2,13 @@ import { ReactNode } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import SliderNextArrow from './SliderNextArrow';
-// import SliderPrevArrow from './SliderPrevArrow';
 import './SliderWrapper.scss';
 
 interface ContainerProps {
   children: ReactNode;
 }
 
-function SliderWrapper({ children }: ContainerProps) {
+const SliderWrapper = ({ children }: ContainerProps) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -49,6 +47,6 @@ function SliderWrapper({ children }: ContainerProps) {
       <Slider {...settings}>{children}</Slider>
     </div>
   );
-}
+};
 
 export default SliderWrapper;

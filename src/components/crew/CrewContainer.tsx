@@ -1,6 +1,7 @@
 import Title from '../title/Title';
 import CrewItem from './CrewItem';
 import './CrewContainer.scss';
+import { filterByType } from '../../utils/services';
 
 interface CrewContainerData {
   adult: boolean;
@@ -20,9 +21,6 @@ interface CrewContainerProps {
   data: CrewContainerData[];
 }
 
-const filterByType = (array: any[], type: string, value: string) => {
-  return array.filter((item) => item[type] === value);
-};
 const CrewContainer = ({ data }: CrewContainerProps) => {
   const filteredByProduction = filterByType(data, 'known_for_department', 'Production');
   const filteredBySound = filterByType(data, 'known_for_department', 'Sound');

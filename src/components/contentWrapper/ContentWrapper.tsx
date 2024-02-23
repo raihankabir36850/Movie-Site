@@ -10,15 +10,7 @@ import GenreContainer from '../genre/GenreContainer';
 import Loader from '../loader/Loader';
 import Similar from '../similar/Similar';
 import Footer from '../footer/Footer';
-
-const MAGIC_NUMBER = 5;
-
-const selectFiveElements = (array: any[]) => {
-  if (!array.length) return array;
-  const shuffled = array.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, MAGIC_NUMBER);
-  return selected;
-};
+import { selectFiveElements } from '../../utils/services';
 
 interface MovieData {
   adult: boolean;
@@ -59,7 +51,7 @@ export const ContentWrapper = () => {
     const response = await fetchData(url);
     if (response?.results?.length) {
       setMovieData((data) => (flag ? [...response.results] : [...data, ...response.results]));
-      setTotalPages(5 || response.total_pages);
+      setTotalPages(5 || response.total_pages); // set visibility --> page number to 5
     }
     setLoading(false);
   };
@@ -118,7 +110,7 @@ export const ContentWrapper = () => {
           <>
             {moviedata && moviedata.length ? (
               <div className='allMoviesSection'>
-                <InfiniteScroll dataLength={moviedata.length} next={fetchNextData} hasMore={true} loader={pageIndex <= 5 ? <p className='customLoading'>Loading...</p> : null}>
+                <InfiniteScroll dataLength={moviedata.length} next={fetchNextData} hasMore={true} loader={pageIndex < 5 ? <p className='customLoading'>Loading...</p> : null}>
                   <Container>
                     <GenreContainer data={moviedata} />
                   </Container>

@@ -9,6 +9,7 @@ import WatchListButton from '../watchList/WatchListButton';
 import posterImage from '../../assets/no_poster.jpg';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { formatWithtDate } from '../../utils/dateFormat';
 
 interface GenreItemData {
   adult: boolean;
@@ -29,13 +30,6 @@ interface GenreItemDataProps {
   movie: GenreItemData;
 }
 
-const formatDate = (dateString: string | number | Date) => {
-  const date = new Date(dateString);
-  //const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  return formattedDate;
-};
-
 const GenreItem = ({ movie }: GenreItemDataProps) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
@@ -48,7 +42,7 @@ const GenreItem = ({ movie }: GenreItemDataProps) => {
       movieTitle: title,
       moviePoster: poster_path,
       voteAverage: vote_average,
-      addedDate: formatDate(new Date()),
+      addedDate: formatWithtDate(new Date()),
     };
 
     const checkItem = watchList.find((item) => item.id === id);

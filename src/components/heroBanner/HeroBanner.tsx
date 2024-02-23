@@ -16,7 +16,6 @@ interface HeroBannerData {
 const HeroBanner = () => {
   const [background, setBackGround] = useState<string>('');
   const { loading, data } = useFetch<HeroBannerData>('movie/upcoming');
-
   const { url } = useSelector((state: RootState) => state.home);
 
   useEffect(() => {

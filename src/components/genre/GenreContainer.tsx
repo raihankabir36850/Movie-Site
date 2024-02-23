@@ -1,4 +1,5 @@
 import GenreItem from './GenreItem';
+import { removeDuplicates } from '../../utils/services';
 
 interface GenreItemData {
   adult: boolean;
@@ -18,17 +19,6 @@ interface GenreItemData {
 interface GenreItemDataProps {
   data: GenreItemData[];
 }
-
-const removeDuplicates = (array: any[]) => {
-  const map = new Map();
-  return array.reduce((result, item) => {
-    if (!map.has(item.id)) {
-      map.set(item.id, true);
-      result.push(item);
-    }
-    return result;
-  }, []);
-};
 
 const GenreContainer = ({ data }: GenreItemDataProps) => {
   const modifiedData = removeDuplicates(data);

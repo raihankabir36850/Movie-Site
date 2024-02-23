@@ -36,19 +36,12 @@ interface GenreData {
 
 const Genre = () => {
   const { genres } = useSelector((state: RootState) => state.home);
-  const { id, genreType } = useParams<{ id: string; genreType: string }>(); // Correct type for useParams
-  const [genreData, setGenreData] = useState<MovieData[]>([]); // Correct type for genreData
-  const [text, setText] = useState<string>(''); // Correct type for text
-  const [page, setPage] = useState<number>(1); // Correct type for page
-  const [totalPages, setTotalPages] = useState<number | null>(null); // Correct type for totalPages
+  const { id, genreType } = useParams<{ id: string; genreType: string }>();
+  const [genreData, setGenreData] = useState<MovieData[]>([]);
+  const [text, setText] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number | null>(null);
   const { loading, data, error } = useFetch<GenreData>(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id}`);
-  // const { genres } = useSelector((state: RootState) => state.home);
-  // const { id, genreType } = useParams();
-  // const [genreData, setGenreData] = useState<MovieData[]>([]);
-  // const [text, setText] = useState('');
-  // const [page, setPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState<number | null>(null);
-  // const { loading, data, error } = useFetch<GenreData>(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${id.toString()}`);
 
   useEffect(() => {
     setGenreData([]);
@@ -92,7 +85,7 @@ const Genre = () => {
                   <HeaderTitle text={text} />
                 </div>
                 <div className='watListMovies'>
-                  <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true} loader={page <= 5 ? <p className='customLoading'>Loading...</p> : null}>
+                  <InfiniteScroll dataLength={genreData.length} next={fetchData} hasMore={true} loader={page < 5 ? <p className='customLoading'>Loading...</p> : null}>
                     <Container>
                       <GenreContainer data={genreData} />
                     </Container>
