@@ -6,31 +6,14 @@ import WatchListButton from '../watchList/WatchListButton';
 import ImdbLogo from '../logo/ImdbLogo';
 import posterImage from '../../assets/no_poster.jpg';
 import { toast } from 'react-toastify';
+import { formatWithtDate, getYearFromDate, toHoursAndMinutes } from '../../utils/dateFormat';
 import 'react-toastify/dist/ReactToastify.css';
 import './MovieCard.scss';
 
-const toHoursAndMinutes = (totalMinutes: number) => {
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-  return `${hours}h ${minutes > 0 ? ` ${minutes}m` : ''}`;
-};
-
-const getYearFromDate = (dateString: string) => {
-  const parts = dateString.split('-');
-  const year = parts[0];
-  return year;
-};
-
-const formatDate = (dateString: string | number | Date) => {
-  const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  return formattedDate;
-};
-
 interface CastData {
   id: number;
-  cast: any[]; // Define proper type for cast array if possible
-  crew: any[]; // Define proper type for crew array if possible
+  cast: any[];
+  crew: any[];
 }
 interface MovieData {
   adult: boolean;
@@ -71,7 +54,7 @@ const MovieCard = ({ data, castData }: MovieDataProps) => {
       movieTitle: title,
       moviePoster: poster_path,
       voteAverage: vote_average,
-      addedDate: formatDate(new Date()),
+      addedDate: formatWithtDate(new Date()),
     };
 
     const check = watchList.find((item) => item.id === id);
@@ -122,7 +105,7 @@ const MovieCard = ({ data, castData }: MovieDataProps) => {
             </div>
             <div className='releaseDate'>
               <span>Release Date</span>
-              <span>{release_date ? formatDate(release_date) : 'N/A'}</span>
+              <span>{release_date ? formatWithtDate(release_date) : 'N/A'}</span>
             </div>
             <div className='duration'>
               <span>Runtime</span>

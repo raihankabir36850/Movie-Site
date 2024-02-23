@@ -7,6 +7,7 @@ import './SimilarItem.scss';
 import StarIcon from '../icon/StarIcon';
 import { getWatchListItem } from '../../store/moviesDetails';
 import WatchListButton from '../watchList/WatchListButton';
+import { formatWithtDate } from '../../utils/dateFormat';
 import posterImage from '../../assets/no_poster.jpg';
 
 interface MovieData {
@@ -28,12 +29,6 @@ interface MovieDataProps {
   res: MovieData;
 }
 
-const formatDate = (dateString: string | number | Date) => {
-  const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  return formattedDate;
-};
-
 const SimilarItem = ({ res }: MovieDataProps) => {
   const dispatch = useDispatch();
   const { url, watchList } = useSelector((state: RootState) => state.home);
@@ -46,7 +41,7 @@ const SimilarItem = ({ res }: MovieDataProps) => {
       movieTitle: title,
       moviePoster: poster_path,
       voteAverage: vote_average,
-      addedDate: formatDate(new Date()),
+      addedDate: formatWithtDate(new Date()),
     };
 
     const checkItem = watchList.find((item) => item.id === id);

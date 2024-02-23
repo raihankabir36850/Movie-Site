@@ -17,3 +17,15 @@ export const formatWithtDate = (dateString: string | number | Date) => {
   const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   return formattedDate;
 };
+
+export const getYearFromDate = (dateString: string) => {
+  const parts = dateString.split('-');
+  const year = parts[0];
+  return year;
+};
+
+export const toHoursAndMinutes = (totalMinutes: number) => {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${hours}h ${minutes > 0 ? ` ${minutes}m` : ''}`;
+};
