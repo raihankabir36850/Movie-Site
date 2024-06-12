@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchData } from './utils/api';
@@ -15,6 +15,8 @@ import Home from './pages/home/Home';
 
 const App = () => {
   const dispatch = useDispatch();
+  const [getMoviesData, setGetMoviesData] = useState([]);
+
   useEffect(() => {
     const fetchApiGenres = async () => {
       const data = await fetchData('/genre/movie/list?language=en');
@@ -47,6 +49,16 @@ const App = () => {
 
     watListItems();
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchApiMovies = async () => {
+      const data = await fetch('/api/movies');
+      const res = await data.json();
+      console.log(res);
+    };
+
+    fetchApiMovies();
+  });
 
   return (
     <BrowserRouter>
