@@ -1,4 +1,4 @@
-import './CastContainer.scss';
+import './castContainer.scss';
 import CastItem from './CastItem';
 import Title from '../title/Title';
 import SliderWrapper from '../slider/SliderWrapper';
